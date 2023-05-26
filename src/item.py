@@ -90,7 +90,8 @@ class Item:
         :raises ValueError: Если строка не может быть преобразована в число.
         """
         try:
-            number = float(string)
+            number = int(float(string))
         except ValueError:
             raise ValueError("Не является числом")
         return number
+

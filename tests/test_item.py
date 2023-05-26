@@ -25,8 +25,8 @@ class TestItem:
 
     # TestCase # 4 name getter
     def test_name(self):
-        item1 = Item('samsung galaxy', 0.0, 0)
-        assert item1.name == 'samsung galaxy'
+        item3 = Item('samsung galaxy', 0.0, 0)
+        assert item3.name == 'samsung galaxy'
 
     # TestCase # 5 name setter
     def test_set_name(self):
@@ -64,7 +64,7 @@ class TestItem:
     def test_string_to_number(self):
         assert Item.string_to_number("123") == 123
         assert Item.string_to_number("-456") == -456
-        assert Item.string_to_number("3.14") == 3.14
+        assert Item.string_to_number("3.14") == 3
         with pytest.raises(ValueError) as value_info:
             Item.string_to_number("abc")
 
