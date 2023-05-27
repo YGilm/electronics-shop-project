@@ -24,6 +24,22 @@ class Item:
         self.quantity = quantity
         self.all.append(self)
 
+    def __repr__(self):
+        """
+        Возвращает строковое представление экземпляра класса Item для отладки.
+
+        :return: Строковое представление экземпляра класса Item.
+        """
+        return f"{__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """
+        Возвращает строковое представление экземпляра класса Item для пользователя.
+
+        :return: Строковое представление экземпляра класса Item.
+        """
+        return f"{self.__name}"
+
     @property
     def name(self):
         """
