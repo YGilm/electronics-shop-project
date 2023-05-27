@@ -70,3 +70,11 @@ class TestItem:
 
         assert str(value_info.value) == "Не является числом"
 
+    def test_repr_(self):
+        item1 = Item('Samsung S21', 70000, 15)
+        assert repr(item1) == "Item('Samsung S21', 70000, 15)"
+
+    def test_str_(self):
+        item1 = Item('Samsung S21', 70000, 15)
+        assert str(item1) == 'Samsung S21'
+
