@@ -40,6 +40,17 @@ class Item:
         """
         return f"{self.__name}"
 
+    def __add__(self, other):
+        """
+        Складывает количество товара текущего экземпляра
+        с другим экземпляром Phone или Item.
+        :return: Возвращает результат сложения по колличеству
+        """
+        from src.phone import Phone
+        if not isinstance(other, (Phone, Item)):
+            raise TypeError("Можно складывать только Phone или Ithem")
+        return self.quantity + other.quantity
+
     @property
     def name(self):
         """
