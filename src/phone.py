@@ -36,7 +36,7 @@ class Phone(Item):
        Параметры: value (int): Количество поддерживаемых сим-карт.
        raises: ValueError: Если значение не больше нуля.
        """
-       if not isinstance(value, int) or value > 0:
+       if isinstance(value, int) and value > 0:
            self.__number_of_sim = value
        else:
            raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')
