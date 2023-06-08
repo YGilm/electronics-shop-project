@@ -10,7 +10,25 @@ class MixinLanguage:
         Инициализация объекта MixinLanguage.
         Аргументы: language (str): Код языка. По умолчанию 'EN'.
         """
-        self.__language = language
+        self._MixinLanguage__language = language
+
+    @property
+    def language(self):
+        """
+        Получить текущий язык клавиатуры.
+        Возвращает: str: Код текущего языка клавиатуры.
+        """
+        return self._MixinLanguage__language
+
+    def change_lang(self):
+        """
+        Изменить язык клавиатуры между 'EN' и 'RU'.
+        """
+        if self._MixinLanguage__language == 'EN':
+            self._MixinLanguage__language = 'RU'
+        else:
+            self._MixinLanguage__language = 'EN'
+        return self
 
 
 class KeyBoard(Item, MixinLanguage):
@@ -27,38 +45,7 @@ class KeyBoard(Item, MixinLanguage):
             language (str): Код языка. По умолчанию 'EN'.
         """
         super().__init__(name, price, quantity)
-        self.__language = language
-
-    @property
-    def language(self):
-        """
-        Получить текущий язык клавиатуры.
-        Возвращает: str: Код текущего языка клавиатуры.
-        """
-        return self.__language
-
-    @language.setter
-    def language(self, value):
-        """
-        Установить язык клавиатуры.
-        Аргументы: value (str): Код языка.
-        Исключения: AttributeError: Если код языка не поддерживается.
-        """
-        if value in ['EN', 'RU']:
-            self.__language = value
-        else:
-            raise AttributeError("Данный язык не поддерживается")
-
-    def change_lang(self):
-        """
-        Изменить язык клавиатуры между 'EN' и 'RU'.
-        Возвращает: KeyBoard: Обновленный объект KeyBoard.
-        """
-        if self.language == 'EN':
-            self.__language = 'RU'
-        else:
-            self.__language = 'EN'
-        return self
+        self._MixinLanguage__language = language
 
     def __repr__(self):
         """
