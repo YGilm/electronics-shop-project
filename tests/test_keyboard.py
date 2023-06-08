@@ -8,15 +8,15 @@ class TestKeyBoard:
         return KeyBoard('Redragon S101 Wired Rgb Backlit', 4600, 10, 'EN')
 
     # TestCase #1
-    def test_language_setter_valid(self):
+    def test_language_valid(self):
         kb = KeyBoard('Redragon S101 Wired Rgb Backlit', 4600.0, 5)
-        kb.language = 'EN'
-        assert kb.language == 'EN'
-        kb.language = 'RU'
+        kb.change_lang()
         assert kb.language == 'RU'
+        kb.change_lang()
+        assert kb.language == 'EN'
 
     # TestCase #2
-    def test_language_setter_invalid(self):
+    def test_language_invalid(self):
         kb = KeyBoard('Redragon S101 Wired Rgb Backlit', 4600.0, 5)
         with pytest.raises(AttributeError):
             kb.language = 'CH'
