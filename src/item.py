@@ -4,6 +4,10 @@ import os
 CSV_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src', 'items.csv'))
 
 
+class InstantiateCSVError(Exception):
+    pass
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -77,20 +81,24 @@ class Item:
     def instantiate_from_csv(cls, CSV_PATH):
         """
         Создает экземпляры класса Item из CSV файла.
-
         :param CSV_PATH: Путь к CSV файлу.
         :return: Список экземпляров класса Item.
         """
         items = []
-        with open(CSV_PATH, 'r', encoding='utf-8') as file:
-            csv_reader = csv.DictReader(file)
-            for row in csv_reader:
-                name = row['name']
-                price = float(row['price'])
-                quantity = int(row['quantity'])
-                item = cls(name, price, quantity)
-                items.append(item)
-        return items
+        try:
+            with open(CSV_PATH, 'r', encoding='utf-8') as file:
+                csv_reader = csv.DictReader(file)
+                if len(csv_reader.fieldnames) != 3:
+                    raise InstantiateCSVError('Файл item.csv поврежден')
+                for row in csv_reader:
+                    name = row.get('name')
+                    price = float(row.get('price', 0))
+                    quantity = int(row.get('quantity', 0))
+                    item = cls(name, price, quantity)
+                    items.append(item)
+            return items
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
 
     def calculate_total_price(self) -> float:
         """
@@ -121,4 +129,3 @@ class Item:
         except ValueError:
             raise ValueError("Не является числом")
         return number
-
